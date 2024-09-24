@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Member
+from django.db.models import Q
 
 
 def members(request):
@@ -29,8 +30,24 @@ def main(request):
 
 def testing(request):
   mymembers = Member.objects.all().values()
+
+  # When using the filter method to fetch data, below method is used:
+  # mydata = Member.objects.filter(firstname='Emil').values()
+  # | Member.objects.filter(firstname='Tobias').values()
+
   template = loader.get_template('template.html')
   context = {
     'mymembers': mymembers,
   }
   return HttpResponse(template.render(context, request))
+
+
+# Queryset filter method using the Q expression
+# def testing(request):
+#   mydata = Member.objects.filter(Q(firstname='Emil') | Q(firstname='Tobias')).values()
+#   template = loader.get_template('template.html')
+#   context = {
+#     'mymembers': mydata,
+#   }
+#   return HttpResponse(template.render(context, request))
+
