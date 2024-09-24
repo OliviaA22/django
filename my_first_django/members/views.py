@@ -51,3 +51,24 @@ def testing(request):
 #   }
 #   return HttpResponse(template.render(context, request))
 
+
+# Queryset filter method using the field lookups which are
+# keywords that represents specific SQL keywords. They must be specified with the
+# fieldname, followed by 2 underscore and then the keyword.
+# example: __startswith, __endswith, etc.
+
+# def testing(request):
+#  mydata = Member.objects.filter(firstname__startswith='L').values()
+#   template = loader.get_template('template.html')
+#   context = {
+#     'mymembers': mydata,
+#   }
+#   return HttpResponse(template.render(context, request))
+
+
+# Queryset order_by() method:
+# mydata = Member.objects.all().order_by('firstname').values()
+
+# Multiple order_by:
+# mydata = Member.objects.all().order_by('lastname', '-id').values()
+
