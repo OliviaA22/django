@@ -17,16 +17,18 @@ My Tennis Club - List of all members
 </div>
 
 
-    <table border='1'>
+    <table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
         <tr>
             <th>ID</th>
             <th>Firstname</th>
             <th>Lastname</th>
         </tr>
+    </thead>
         {% for x in mymembers %}
         <tr>
             <td>{{ x.id }}</td>
-            <td><a href="details/{{ x.id }}">{{ x.firstname }}</a></td>
+            <td><a href="details/{{ x.slug }}">{{ x.firstname }}</a></td>
             <td>{{ x.lastname }}</td>
         </tr>
         {% endfor %}
