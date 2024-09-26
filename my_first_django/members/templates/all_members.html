@@ -7,13 +7,30 @@ My Tennis Club - List of all members
 
 {% block content %}
 
-<p><a href="/">HOME</a></p>
+  <div class="mycard">
+    <h1>Members</h1>
+    <ul>
+      {% for x in mymembers %}
+        <li onclick="window.location = 'details/{{ x.id }}'">{{ x.firstname }} {{ x.lastname }}</li>
+      {% endfor %}
+    </ul>
+  </div>
 
-<h1>Members</h1>
-
-<ul>
+<table border='1'>
+    <tr>
+        <th>ID</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+    </tr>
     {% for x in mymembers %}
-    <li><a href="details/{{ x.id }}">{{ x.firstname }} {{ x.lastname }}</a></li>
+    <tr>
+        <td>{{ x.id }}</td>
+        <td><a href="details/{{ x.id }}">{{ x.firstname }}</a></td>
+        <td>{{ x.lastname }}</td>
+    </tr>
     {% endfor %}
-</ul>
+</table>
+
 {% endblock %}
+
+
