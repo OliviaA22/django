@@ -81,9 +81,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'adminuser',
-        'PASSWORD': 'royalengel22',
-        'HOST': 'olivia-database.c9eaqyumu7gb.eu-north-1.rds.amazonaws.com',
-        'PORT': '5432'
+        'PASSWORD': 'Royalengel22',
+        'HOST': 'my-django-db.postgres.database.azure.com',
+        'PORT': '5432',
+        'OPTIONS': {
+            'sslmode': 'require',  # Enforces SSL for the connection
+        }
     }
 }
 
