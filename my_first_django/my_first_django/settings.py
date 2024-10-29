@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import sys
 from pathlib import Path
 
 import os
@@ -116,6 +116,35 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# Internal IP address set uop for the debug toolbar
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+
+# Conditionally add the debug toolbar  to the INSTALLED_APPS and
+# MIDDLEWARE list if not in a test environment
+
+TESTING = "test" in sys.argv
+
+if not TESTING:
+    INSTALLED_APPS = [
+        *INSTALLED_APPS,
+        "debug_toolbar",
+    ]
+
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
+
+
+def show_toolbar(request):
+    # Show toolbar if request comes from an IP in INTERNAL_IPS or if an environment variable is set
+    return request.META.get("REMOTE_ADDR") in INTERNAL_IPS or os.getenv("ENABLE_DEBUG_TOOLBAR") == "True"
+
+
+SHOW_TOOLBAR_CALLBACK = "my_first_django.settings.show_toolbar"
 
 
 # Internationalization
